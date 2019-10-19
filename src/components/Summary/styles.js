@@ -34,10 +34,6 @@ export const ListItem = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-
-    div:first-child {
-        width: 100%;
-    }
 `;
 
 export const Profit = styled.div`
@@ -47,4 +43,8 @@ export const Profit = styled.div`
         font-weight: bold;
         margin-bottom: 0;
     }
+`;
+
+export const StockInfo = styled.div`
+    width: 100%;
 `;

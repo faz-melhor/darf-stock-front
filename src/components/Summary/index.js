@@ -1,29 +1,26 @@
 import React from 'react';
 import { List } from 'antd';
 
-import { Container, ListItem, Profit, Footer, Content } from './styles.js';
+import { Container, ListItem, Profit, Footer, Content, StockInfo } from './styles';
 
 export default function Summary() {
     // TODO: request from backend
     const assets = [{
-        assetName: 'ITUB3',
+        stockSymbol: 'ITUB3',
         averagePrice: 20,
-        sellPrice: 30,
-        totalSold: 10
+        sellingPrice: 30,
+        quantitySold: 10,
+        profit: 100
     }, {
         assetName: 'ABV3',
         averagePrice: 30,
-        sellPrice: 45,
-        totalSold: 20
-    }
-    ];
-
-    function calcProfit(asset) {
-        return (asset.sellPrice - asset.averagePrice) * asset.totalSold;
-    }
+        sellingPrice: 45,
+        quantitySold: 20,
+        profit: 300
+    }];
 
     function totalProfit() {
-        return assets.reduce((a, b) => a + calcProfit(b), 0);
+        return assets.reduce((a, b) => a + b.profit, 0);
     }
 
     function calcTax() {
@@ -37,16 +34,16 @@ export default function Summary() {
                 <List
                     dataSource={assets}
                     renderItem={item => (
-                        <List.Item key={item.assetName}>
+                        <List.Item key={item.stockSymbol}>
                             <ListItem>
-                                <div>
-                                    <p>{item.assetName}</p>
+                                <StockInfo>
+                                    <p>{item.stockSymbol}</p>
                                     <p>Preço médio: R${item.averagePrice}</p>
-                                    <p>Preço de venda: R${item.sellPrice}</p>
-                                </div>
+                                    <p>Preço de venda: R${item.sellingPrice}</p>
+                                </StockInfo>
                                 <Profit>
-                                    <p>R${calcProfit(item)}</p>
-                                    <small>({item.totalSold})</small>
+                                    <p>R${item.profit}</p>
+                                    <small>({item.quantitySold})</small>
                                 </Profit>
                             </ListItem>
                         </List.Item>
