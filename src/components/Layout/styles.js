@@ -1,10 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
-
-export const GlobalStyle = createGlobalStyle`
-  body {
-    background: ${props => props.theme.colors.clouds};
-  }
-`;
+import styled from 'styled-components';
 
 export const MainLayout = styled.main`
   margin: 0 auto;
