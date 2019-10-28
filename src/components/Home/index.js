@@ -37,8 +37,8 @@ function Home() {
     setFileList(newFileList);
   };
 
-  const beforeUpload = file => {
-    setFileList([...fileList, file]);
+  const beforeUpload = (file, newFileList) => {
+    setFileList([...fileList, ...newFileList]);
     return false;
   };
 
@@ -48,6 +48,7 @@ function Home() {
         onRemove={onRemoveFile}
         beforeUpload={beforeUpload}
         fileList={fileList}
+        multiple
       >
         <Button>
           <Icon type="upload" /> Select File
