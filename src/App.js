@@ -7,24 +7,27 @@ import GlobalStyle from './styles/GlobalStyle';
 import styles from './styles';
 import Summary from './components/Summary';
 import Home from './components/Home';
+import { DataProvider } from './context';
 
 function App() {
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={styles}>
-        <GlobalStyle />
-        <Layout centered>
-          <Switch>
-            <Route path="/summary">
-              <Summary />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </Layout>
-      </ThemeProvider>
-    </BrowserRouter>
+    <DataProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={styles}>
+          <GlobalStyle />
+          <Layout centered>
+            <Switch>
+              <Route path="/summary">
+                <Summary />
+              </Route>
+              <Route exact path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </Layout>
+        </ThemeProvider>
+      </BrowserRouter>
+    </DataProvider>
   );
 }
 
