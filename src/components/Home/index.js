@@ -10,8 +10,6 @@ function Home({ history }) {
   const [fileList, setFileList] = useState([]);
   const [uploading, setUploading] = useState(false);
 
-  console.log('data', data);
-
   const handleUpload = () => {
     const formData = new FormData();
     fileList.forEach(file => {
