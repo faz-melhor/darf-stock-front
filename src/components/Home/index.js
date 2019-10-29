@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Upload, Button, Icon, message } from 'antd';
+import { DataContext } from '../../context';
 import api from '../../api';
 
 import { Container } from './styles';
 
-function Home() {
+function Home({ history }) {
+  const [data, setData] = useContext(DataContext);
   const [fileList, setFileList] = useState([]);
   const [uploading, setUploading] = useState(false);
 
@@ -18,15 +20,16 @@ function Home() {
 
     // API Request
     api
-      .post('/', formData)
+      .post('/upload', formData)
       .then(res => {
+        setData(res.data);
         setFileList([]);
         setUploading(false);
-        message.success('upload successfully.');
+        history.push('/summary');
       })
       .catch(() => {
         setUploading(false);
-        message.error('upload failed.');
+        message.error('Upload failed.');
       });
   };
 
