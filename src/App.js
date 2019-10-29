@@ -15,12 +15,8 @@ function App() {
         <GlobalStyle />
         <Layout centered>
           <Switch>
-            <Route path="/summary">
-              <Summary />
-            </Route>
-            <Route exact path="/">
-              <Home />
-            </Route>
+            <Route path="/summary" component={Summary} />
+            <Route exact path="/" component={Home} />
           </Switch>
         </Layout>
       </ThemeProvider>
