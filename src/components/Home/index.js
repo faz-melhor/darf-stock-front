@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Upload, Button, Icon, message } from 'antd';
+import { DataContext } from '../../context';
 import api from '../../api';
 
 import { Container } from './styles';
 
 function Home({ history }) {
+  const [data, setData] = useContext(DataContext);
   const [fileList, setFileList] = useState([]);
   const [uploading, setUploading] = useState(false);
+
+  console.log('data', data);
 
   const handleUpload = () => {
     const formData = new FormData();
