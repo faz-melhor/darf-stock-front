@@ -24,6 +24,7 @@ function Home({ history }) {
     api
       .post('/upload', formData)
       .then(res => {
+        setData(res.data);
         setFileList([]);
         setUploading(false);
         history.push('/summary');
