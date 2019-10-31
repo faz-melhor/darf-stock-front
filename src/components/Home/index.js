@@ -4,18 +4,7 @@ import { Upload, Button, Icon, message, Typography } from 'antd';
 import { DataContext } from '../../context';
 import api from '../../api';
 
-import { Container } from './styles';
-
-const transition = { duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] };
-const animationVariants = {
-  initial: { scale: 0.9, opacity: 0 },
-  animate: { scale: 1, opacity: 1, transition },
-  exit: {
-    scale: 0.5,
-    opacity: 0,
-    transition: { duration: 1.5, ...transition },
-  },
-};
+import { Container, animationVariants } from './styles';
 
 function Home(props) {
   let history = useHistory();
