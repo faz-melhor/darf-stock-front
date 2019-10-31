@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import { AnimatePresence } from 'framer-motion';
 import 'antd/dist/antd.css';
 import Layout from './components/Layout';
 import GlobalStyle from './styles/GlobalStyle';
@@ -16,10 +17,16 @@ function App() {
         <ThemeProvider theme={styles}>
           <GlobalStyle />
           <Layout centered>
-            <Switch>
-              <Route path="/summary" component={Summary} />
-              <Route exact path="/" component={Home} />
-            </Switch>
+            <Route
+              render={({ location }) => (
+                <AnimatePresence exitBeforeEnter>
+                  <Switch location={location} key={location.pathname}>
+                    <Route path="/summary" component={Summary} />
+                    <Route exact path="/" component={Home} />
+                  </Switch>
+                </AnimatePresence>
+              )}
+            />
           </Layout>
         </ThemeProvider>
       </BrowserRouter>

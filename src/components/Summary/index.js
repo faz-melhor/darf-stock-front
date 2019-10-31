@@ -11,6 +11,20 @@ import {
   StockInfo,
 } from './styles';
 
+const transition = {
+  duration: 1,
+  ease: [0.43, 0.13, 0.23, 0.96],
+};
+
+const animationVariants = {
+  exit: { y: '50%', opacity: 0, transition },
+  enter: {
+    y: '0%',
+    opacity: 1,
+    transition,
+  },
+};
+
 export default function Summary() {
   const [data] = useContext(DataContext);
 
@@ -42,7 +56,13 @@ export default function Summary() {
   }
 
   return (
-    <Container>
+    <Container
+      key="summary"
+      initial="exit"
+      animate="enter"
+      exit="exit"
+      variants={animationVariants}
+    >
       <Content>
         <List
           dataSource={assets}
