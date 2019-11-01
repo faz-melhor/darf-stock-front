@@ -1,12 +1,14 @@
 import React, { useState, useContext } from 'react';
-import { Upload, Button, Icon, message } from 'antd';
+import { useHistory } from 'react-router-dom';
+import { Upload, Button, Icon, message, Typography } from 'antd';
 import { DataContext } from '../../context';
 import api from '../../api';
 
-import { Container } from './styles';
+import { Container, animationVariants } from './styles';
 
-function Home({ history }) {
-  const [data, setData] = useContext(DataContext);
+function Home(props) {
+  let history = useHistory();
+  const setData = useContext(DataContext)[1];
   const [fileList, setFileList] = useState([]);
   const [uploading, setUploading] = useState(false);
 
@@ -46,7 +48,15 @@ function Home({ history }) {
   };
 
   return (
-    <Container>
+    <Container
+      key="home"
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      positionTransition
+      variants={animationVariants}
+    >
+      <Typography.Title>Darf Stock</Typography.Title>
       <Upload
         onRemove={onRemoveFile}
         beforeUpload={beforeUpload}

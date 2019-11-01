@@ -9,6 +9,7 @@ import {
   Footer,
   Content,
   StockInfo,
+  animationVariants,
 } from './styles';
 
 export default function Summary() {
@@ -42,7 +43,13 @@ export default function Summary() {
   }
 
   return (
-    <Container>
+    <Container
+      key="summary"
+      initial="exit"
+      animate="enter"
+      exit="exit"
+      variants={animationVariants}
+    >
       <Content>
         <List
           dataSource={assets}
