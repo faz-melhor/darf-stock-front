@@ -1,9 +1,17 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const Container = styled(motion.section)`
+export const Container = styled(motion.div)`
+  width: 100%;
+  max-width: 620px;
+  margin: 20px auto 20px auto;
+  text-align: center;
+`;
+
+export const Card = styled.div`
   width: 100%;
   background: white;
+  text-align: left;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
     0 1px 2px rgba(0, 0, 0, 0.24);
   border-radius: 2px;
@@ -21,10 +29,15 @@ export const Content = styled.div`
 `;
 
 export const Footer = styled.footer`
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: #E0E0E0;
+  color: black;
   height: 60px;
   text-align: end;
   padding: 5px 16px 0 0;
+  position: sticky;
+  bottom: 0;
+  right: 0;
+  width: 100%;
 
   p {
     margin-bottom: 5px;
@@ -44,6 +57,7 @@ export const Profit = styled.div`
   p {
     font-weight: bold;
     margin-bottom: 0;
+    color: ${props => props.profit > 0 ? '#21421e' : '#cf073a'}
   }
 `;
 
