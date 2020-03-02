@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { DataContext } from '../../context';
-import { List } from 'antd';
+import { List, Typography } from 'antd';
 
 import {
   Container,
@@ -10,6 +10,7 @@ import {
   Content,
   StockInfo,
   animationVariants,
+  Card
 } from './styles';
 
 export default function Summary() {
@@ -25,7 +26,35 @@ export default function Summary() {
       profit: 100,
     },
     {
-      assetName: 'ABV3',
+      stockSymbol: 'ABV3',
+      averagePrice: 30,
+      sellingPrice: 45,
+      quantitySold: 20,
+      profit: 300,
+    },
+    {
+      stockSymbol: 'ABV3',
+      averagePrice: 30,
+      sellingPrice: 45,
+      quantitySold: 20,
+      profit: -10,
+    },
+    {
+      stockSymbol: 'ABV3',
+      averagePrice: 30,
+      sellingPrice: 45,
+      quantitySold: 20,
+      profit: 300,
+    },
+    {
+      stockSymbol: 'ABV3',
+      averagePrice: 30,
+      sellingPrice: 45,
+      quantitySold: 20,
+      profit: 300,
+    },
+    {
+      stockSymbol: 'ABV3',
       averagePrice: 30,
       sellingPrice: 45,
       quantitySold: 20,
@@ -50,31 +79,34 @@ export default function Summary() {
       exit="exit"
       variants={animationVariants}
     >
-      <Content>
-        <List
-          dataSource={assets}
-          renderItem={item => (
-            <List.Item key={item.stockSymbol}>
-              <ListItem>
-                <StockInfo>
-                  <p>{item.stockSymbol}</p>
-                  <p>Preço médio: R${item.averagePrice}</p>
-                  <p>Preço de venda: R${item.sellingPrice}</p>
-                </StockInfo>
-                <Profit>
-                  <p>R${item.profit}</p>
-                  <small>({item.quantitySold})</small>
-                </Profit>
-              </ListItem>
-            </List.Item>
-          )}
-        ></List>
-      </Content>
+      <Typography.Title>Darf Stock</Typography.Title>
+      <Card>
+        <Content>
+          <List
+            dataSource={assets}
+            renderItem={item => (
+              <List.Item key={item.stockSymbol}>
+                <ListItem>
+                  <StockInfo>
+                    <p><strong>{item.stockSymbol}</strong></p>
+                    <p>Preço médio: R${item.averagePrice}</p>
+                    <p>Preço de venda: R${item.sellingPrice}</p>
+                  </StockInfo>
+                  <Profit profit={item.profit}>
+                    <p>R${item.profit}</p>
+                    <small>({item.quantitySold})</small>
+                  </Profit>
+                </ListItem>
+              </List.Item>
+            )}
+          ></List>
+        </Content>
 
-      <Footer>
-        <p>Total: R${totalProfit()}</p>
-        <p>Imposto: R${calcTax()}</p>
-      </Footer>
+        <Footer>
+          <p>Total: R${totalProfit()}</p>
+          <p>Imposto: R${calcTax()}</p>
+        </Footer>
+      </Card>
     </Container>
   );
 }
