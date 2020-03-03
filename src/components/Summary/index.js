@@ -6,70 +6,15 @@ import {
   Container,
   ListItem,
   Profit,
-  Footer,
   Content,
   StockInfo,
   animationVariants,
-  Card
+  Card,
 } from './styles';
 
 export default function Summary() {
   const [data] = useContext(DataContext);
-
-  // REMOVE MOCK CODE
-  const assets = [
-    {
-      stockSymbol: 'ITUB3',
-      averagePrice: 20,
-      sellingPrice: 30,
-      quantitySold: 10,
-      profit: 100,
-    },
-    {
-      stockSymbol: 'ABV3',
-      averagePrice: 30,
-      sellingPrice: 45,
-      quantitySold: 20,
-      profit: 300,
-    },
-    {
-      stockSymbol: 'ABV3',
-      averagePrice: 30,
-      sellingPrice: 45,
-      quantitySold: 20,
-      profit: -10,
-    },
-    {
-      stockSymbol: 'ABV3',
-      averagePrice: 30,
-      sellingPrice: 45,
-      quantitySold: 20,
-      profit: 300,
-    },
-    {
-      stockSymbol: 'ABV3',
-      averagePrice: 30,
-      sellingPrice: 45,
-      quantitySold: 20,
-      profit: 300,
-    },
-    {
-      stockSymbol: 'ABV3',
-      averagePrice: 30,
-      sellingPrice: 45,
-      quantitySold: 20,
-      profit: 300,
-    },
-  ];
-
-  function totalProfit() {
-    return assets.reduce((a, b) => a + b.profit, 0);
-  }
-
-  function calcTax() {
-    const profit = totalProfit();
-    return profit > 20000 ? profit * 0.15 : 0;
-  }
+  console.log(data);
 
   return (
     <Container
@@ -82,30 +27,30 @@ export default function Summary() {
       <Typography.Title>Darf Stock</Typography.Title>
       <Card>
         <Content>
-          <List
-            dataSource={assets}
-            renderItem={item => (
-              <List.Item key={item.stockSymbol}>
-                <ListItem>
-                  <StockInfo>
-                    <p><strong>{item.stockSymbol}</strong></p>
-                    <p>Preço médio: R${item.averagePrice}</p>
-                    <p>Preço de venda: R${item.sellingPrice}</p>
-                  </StockInfo>
-                  <Profit profit={item.profit}>
-                    <p>R${item.profit}</p>
-                    <small>({item.quantitySold})</small>
-                  </Profit>
-                </ListItem>
-              </List.Item>
-            )}
-          ></List>
+          {data && data.length ? (
+            <List
+              dataSource={data}
+              renderItem={item => (
+                <List.Item key={item.monthYear}>
+                  <ListItem>
+                    <StockInfo>
+                      <p>
+                        <strong>{item.monthYear}</strong>
+                      </p>
+                      <p>Vendido: R${item.sell.toFixed(2)}</p>
+                      <p>Imposto: R${item.tax.toFixed(2)}</p>
+                    </StockInfo>
+                    <Profit profit={item.total}>
+                      <p>R${item.total.toFixed(2)}</p>
+                    </Profit>
+                  </ListItem>
+                </List.Item>
+              )}
+            ></List>
+          ) : (
+            ''
+          )}
         </Content>
-
-        <Footer>
-          <p>Total: R${totalProfit()}</p>
-          <p>Imposto: R${calcTax()}</p>
-        </Footer>
       </Card>
     </Container>
   );

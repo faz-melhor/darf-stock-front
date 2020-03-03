@@ -9,14 +9,12 @@ import { Container, animationVariants } from './styles';
 function Home(props) {
   let history = useHistory();
   const setData = useContext(DataContext)[1];
-  const [fileList, setFileList] = useState([]);
+  const [file, setFile] = useState([]);
   const [uploading, setUploading] = useState(false);
 
   const handleUpload = () => {
     const formData = new FormData();
-    fileList.forEach(file => {
-      formData.append('files[]', file);
-    });
+    formData.append('file', file);
 
     setUploading(true);
 
@@ -25,7 +23,7 @@ function Home(props) {
       .post('/upload', formData)
       .then(res => {
         setData(res.data);
-        setFileList([]);
+        setFile(null);
         setUploading(false);
         history.push('/summary');
       })
@@ -36,14 +34,11 @@ function Home(props) {
   };
 
   const onRemoveFile = file => {
-    const index = fileList.indexOf(file);
-    const newFileList = fileList.slice();
-    newFileList.splice(index, 1);
-    setFileList(newFileList);
+    setFile(null);
   };
 
-  const beforeUpload = (file, newFileList) => {
-    setFileList([...fileList, ...newFileList]);
+  const beforeUpload = (file) => {
+    setFile(file);
     return false;
   };
 
@@ -60,8 +55,8 @@ function Home(props) {
       <Upload
         onRemove={onRemoveFile}
         beforeUpload={beforeUpload}
-        fileList={fileList}
-        multiple
+        file={file}
+        accept=".xls"
       >
         <Button>
           <Icon type="upload" /> Select File
@@ -70,7 +65,7 @@ function Home(props) {
       <Button
         type="primary"
         onClick={handleUpload}
-        disabled={fileList.length === 0}
+        disabled={!file}
         loading={uploading}
         style={{ marginTop: 16 }}
       >
